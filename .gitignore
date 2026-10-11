@@ -1,0 +1,12 @@
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+
+# Editor / OS
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# Estado de prueba local
+/local-test/
