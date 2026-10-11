@@ -1,13 +1,15 @@
 # yt-player ♥
 
-Un reproductor de YouTube minimalista para la terminal. Escribís `yt nombre de la canción`, se encola, suelta la terminal al toque, y una **barra de progreso kawaii** se dibuja sobre la canción que está sonando — reescribiéndose en su lugar, sin escupir líneas nuevas.
+Escuchá música directamente de YouTube en tu terminal. **Sin anuncios**, sin app pesada, sin cuenta. Escribís `yt nombre de la canción`, se encola, suelta la terminal al toque, y una **barra de progreso kawaii** se dibuja sobre la canción que está sonando — reescribiéndose en su lugar, sin escupir líneas nuevas.
 
 Simple, sin systemd, sin base de datos. Solo bash, Python, mpv y yt-dlp.
 
 ## Cómo se ve
 
+![yt-player demo](docs/yt-player-demo.gif)
+
 ```
-  ♥ The Girl from Ipanema - Stan Getz & Joao Gilberto
+  ♥ CUTE KAWAII BACKGROUND MUSIC NO COPYRIGHT
 
   ┌────────────────── rosa claro ──────────────────┐
   │ ♡♡♡✧♡♡♥♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡  01:23 ✧ 03:45 │
@@ -20,6 +22,8 @@ Simple, sin systemd, sin base de datos. Solo bash, Python, mpv y yt-dlp.
 - Caja con borde rosa; tiempos en cada extremo
 
 La barra lee el tiempo real del socket IPC de mpv y se **reescribe en su lugar** (sube el cursor y borra), no apila líneas nuevas. El ancho total es constante en cada frame, así el bloque de tiempos nunca se mueve.
+
+![barra kawaii](docs/kawaii-bar.gif)
 
 ## Instalación (una línea)
 
@@ -92,7 +96,7 @@ Variables de entorno (opcionales — todo tiene defaults sensatos):
 
 ## Requisitos del terminal
 
-- Glifos que se ven bien: `♥ ♡ ✧ ─ │ ┌ ┐ └ ┘`. Con una Nerd Font o cualquier fuente mono con soporte Unicode andá sobrado. (Probado con JetBrains Mono Nerd Font.)
+- Glifos que se ven bien: `♥ ♡ ✧ ─ │ ┌ ┐ └ ┘`. Con una Nerd Font o cualquier fuente mono con soporte Unicode andá sobrado. (Probado con JetBrains Mono Nerd Font y DejaVu Sans Mono.)
 - La barra usa códigos ANSI de 256 colores; no necesita truecolor.
 
 ## Desarrollo
@@ -106,6 +110,9 @@ yt-player/
 │   ├── yt-queue-enqueue.sh # mete en queue.tsv y despierta al worker
 │   ├── yt-queue-worker.py  # worker: cola → playing/ → mpv → barra
 │   └── yt-bar.py           # la barra kawaii (lee IPC de mpv)
+├── docs/
+│   ├── yt-player-demo.gif  # demo completa del flujo
+│   └── kawaii-bar.gif      # la barra en acción
 ├── LICENSE
 └── README.md
 ```
