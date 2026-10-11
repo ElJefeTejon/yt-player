@@ -4,6 +4,38 @@ Escuchá música directamente de YouTube en tu terminal. **Sin anuncios**, sin a
 
 Simple, sin systemd, sin base de datos. Solo bash, Python, mpv y yt-dlp.
 
+## Requisitos
+
+yt-player corre en cualquier Linux o macOS con bash. El script de instalación detecta e instala las dependencias que falten automáticamente.
+
+### Distros soportadas
+
+El instalador reconoce tu gestor de paquetes y hace todo por vos:
+
+| Distro | Gestor | ¿Instala deps? |
+|--------|--------|----------------|
+| Debian / Ubuntu / Mint | `apt` | ✅ |
+| Fedora / RHEL / CentOS | `dnf` | ✅ |
+| Arch / Manjaro / EndeavourOS | `pacman` | ✅ |
+| macOS | `brew` | ✅ |
+
+Si usás otra distro (Alpine, Gentoo, Void, etc.), el instalador te avisa qué dependencias instalar a mano y sigue con el resto.
+
+### Windows
+
+Windows nativo no funciona — yt-player usa `bash`, `flock` y rutas Unix (`~/.local/bin`). Pero con **WSL** (Windows Subsystem for Linux) o **MSYS2** debería andar sin problemas. Instalá una distro de WSL (Ubuntu la más fácil) y seguí las instrucciones de Linux normalmente.
+
+### Dependencias
+
+| Herramienta | Para qué | Cómo la consigue install.sh |
+|-------------|----------|------------------------------|
+| `python3` | worker + barra | gestor de paquetes |
+| `mpv` | reproduce el audio | gestor de paquetes |
+| `ffmpeg` | extrae audio (yt-dlp) | gestor de paquetes |
+| `yt-dlp` | busca y descarga | binario standalone de GitHub |
+
+Todas se instalan automáticamente durante `install.sh` — no necesitás hacer nada a mano.
+
 ## Cómo se ve
 
 ![yt-player demo](docs/yt-player-demo.gif)
@@ -31,22 +63,17 @@ La barra lee el tiempo real del socket IPC de mpv y se **reescribe en su lugar**
 curl -fsSL https://raw.githubusercontent.com/jefetejon/yt-player/main/install.sh | bash
 ```
 
-Revisa e instala las dependencias que falten (`mpv`, `ffmpeg`, `yt-dlp`, `python3`), copia el código a `~/.local/lib/yt-player/` y crea los comandos `yt` y `ytq` en `~/.local/bin/`.
+El instalador:
+1. Detecta e instala las dependencias que falten
+2. Copia el código a `~/.local/lib/yt-player/`
+3. Crea los comandos `yt` y `ytq` en `~/.local/bin/`
+4. Verifica que `~/.local/bin` esté en tu PATH
 
 ### O si ya tenés el repo clonado
 
 ```bash
 ./install.sh
 ```
-
-### Dependencias
-
-| Herramienta | Para qué | Cómo la consigue install.sh |
-|-------------|----------|------------------------------|
-| `python3`   | worker + barra | gestor de paquetes |
-| `mpv`       | reproduce el audio | gestor de paquetes |
-| `ffmpeg`    | extrae audio (yt-dlp) | gestor de paquetes |
-| `yt-dlp`    | busca y descarga | binario standalone de GitHub |
 
 ## Uso
 
